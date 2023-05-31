@@ -1,5 +1,6 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { Provider } = require('./providers.model');
+const { Users } = require('./users.model');
 
 const REQUEST_TABLE = 'request';
 
@@ -38,8 +39,13 @@ const RequestSchema = {
     },
     emmissionDate:{
         allowNull: false,
-        type: DataTypes.DATE,
+        type: DataTypes.STRING,
         field: 'emmissionDate'
+    } ,
+    expirationDate:{
+        allowNull: false,
+        type: DataTypes.STRING,
+        field: 'expirationDate'
     } ,
     currency:{
         allowNull: false,
@@ -64,7 +70,20 @@ const RequestSchema = {
         allowNull: false,
         type: DataTypes.STRING,
         field: 'paymentType'
-    } 
+    },
+    userId:{
+        allowNull: false,
+        type: DataTypes.INTEGER,
+        field: 'userId',
+        references: {
+            model: 'Users',
+            key: 'id'
+          }
+    } ,
+    state:{
+        allowNull: false,
+        type: DataTypes.STRING
+    },
 }
   
 module.exports = { Request, RequestSchema };
