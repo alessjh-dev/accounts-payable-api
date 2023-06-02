@@ -17,7 +17,7 @@ class UsersService {
     
     async findOneByUserAndPassword(username, password) {
       const res = await models.Users.findOne({
-        where: {
+        where: {   
           username: username,
           password: password
         }
