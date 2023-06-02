@@ -7,6 +7,8 @@ router
     .get('/:id', requestController.getById )
     .post('/', requestController.create )
     .put('/:id', requestController.update )
-    .delete('/:id', requestController._delete );
+    .delete('/:id', requestController._delete )
+    .get('/user-id/:userId', requestController.getByUserId)
+    .get('/state/:state', requestController.getByState)
 
 module.exports = router;

@@ -84,6 +84,15 @@ const RequestSchema = {
         allowNull: false,
         type: DataTypes.STRING
     },
+    billId:{
+        allowNull: false,
+        type: DataTypes.INTEGER,
+        field: 'billId',
+        references: {
+            model: 'Bills',
+            key: 'id'
+          }
+    } ,
 }
   
 module.exports = { Request, RequestSchema };

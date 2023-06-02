@@ -1,14 +1,5 @@
-const RequestService = require("../services/request.service");
-const service = new RequestService();
-
-const create = async (req, res) => {
-  try {
-    const response = await service.create(req.body);
-    res.json(response);
-  } catch (error) {
-    res.status(500).send({ success: false, message: error.message });
-  }
-};
+const BillsService = require("../services/bills.service");
+const service = new BillsService();
 
 const get = async (req, res) => {
   try {
@@ -23,7 +14,12 @@ const getById = async (req, res) => {
   try {
     const { id } = req.params;
     const response = await service.findOne(id);
-    res.json(response);
+    if (!response) {
+      return res.status(404).json({ error: "Archivo no encontrado" });
+    }
+    res.set('Content-Type', response.type);
+    res.set('Content-Disposition', `attachment; filename="factura"`);
+    res.send(response.file);
   } catch (error) {
     res.status(500).send({ success: false, message: error.message });
   }
@@ -50,32 +46,9 @@ const _delete = async (req, res) => {
   }
 };
 
-const getByUserId = async (req, res) => {
-  try {
-    const {userId} = req.params;
-    const response = await service.findByUserId(userId);
-    res.json(response);
-  } catch (error) {
-    
-  }
-}
-
-const getByState = async (req, res) => {
-  try {
-    const {state} = req.params;
-    const response = await service.findByState(state);
-    res.json(response);
-  } catch (error) {
-    
-  }
-}
-
 module.exports = {
-  create,
   get,
   getById,
   update,
   _delete,
-  getByUserId,
-  getByState
 };

@@ -30,6 +30,25 @@ class RequestService {
       await model.destroy();
       return { deleted: true };
     }
+
+    async findByUserId(userId) {
+      const res = await models.Request.findAll({
+        where: {
+          userId: userId
+        }
+      });
+      return res;
+    }
+
+    async findByState(state) {
+      const res = await models.Request.findAll({
+        where: {
+          state: state
+        }
+      });
+      console.log(res)
+      return res;
+    }
   
   }
   
