@@ -92,7 +92,15 @@ const RequestSchema = {
             model: 'Bills',
             key: 'id'
           }
-    } ,
+    },
+    billType:{
+        allowNull: false,
+        type: DataTypes.STRING
+    },
+    specialCategory:{
+        allowNull: false,
+        type: DataTypes.STRING
+    },
 }
   
 module.exports = { Request, RequestSchema };
