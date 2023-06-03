@@ -5,7 +5,7 @@ class ProvidersService {
     constructor() {}
 
     async find() {
-      const res = await models.Provider.findAll();
+      const res = await models.Provider.findAll({order: [['id', 'DESC']]});
       return res;
     }
 
